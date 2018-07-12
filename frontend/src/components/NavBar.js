@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Navbar, Nav,  MenuItem, NavDropdown } from 'react-bootstrap'
-import { fetchCategories } from '../actions/categories'
+import { getCategories } from '../actions/categories'
 import { connect } from 'react-redux'
 import { capitalize } from '../utils/helpers'
 import { Link } from 'react-router-dom'
 
 class NavBar extends Component {
   componentDidMount () {
-    this.props.fetchCategories()
+    this.props.getCategories()
   }
 
   render() {
@@ -35,8 +35,8 @@ class NavBar extends Component {
                     >
                     { capitalize(category.name) }
                   </MenuItem>
-              ))
-            }
+                ))
+              }
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
@@ -63,7 +63,7 @@ function mapStateToProps ( categories ) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    fetchCategories: (data) => dispatch(fetchCategories(data)),
+    getCategories: (data) => dispatch(getCategories(data)),
   }
 }
 

@@ -14,3 +14,16 @@ export const fetchCategories = () =>
   fetch(`${api}/categories`, { headers })
     .then(res => res.json())
     .then(data => data.categories)
+
+// Posts
+export const fetchPosts = (category) => {
+  if (category) {
+    return fetch( `${api}/${category}/posts` , { headers })
+      .then(res => res.json())
+      .then(data => data)
+  } else {
+    return fetch( `${api}/posts`, { headers })
+      .then(res => res.json())
+      .then(data => data)
+  }
+}
