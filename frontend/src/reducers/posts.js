@@ -1,4 +1,4 @@
-import { GET_POSTS } from '../actions/types'
+import { GET_POSTS, GET_POST } from '../actions/types'
 
 function posts (state = {}, action) {
   const { posts } = action
@@ -10,4 +10,14 @@ function posts (state = {}, action) {
   }
 }
 
-export default posts
+function post (state = {}, action) {
+  const { post } = action
+  switch (action.type) {
+    case GET_POST :
+      return post
+    default :
+      return state
+  }
+}
+
+export {post, posts}

@@ -3,7 +3,7 @@ import NavBar from './components/NavBar'
 import { fetchCategories, fetchPosts } from './utils/api'
 import { Route, Switch } from 'react-router-dom'
 import PostList from './components/PostList'
-
+import PostDetail from './components/PostDetail'
 
 class App extends Component {
 
@@ -17,7 +17,8 @@ class App extends Component {
       <div className="App">
         <NavBar />
         <Switch>
-          <Route path="/" component={PostList} />
+          <Route exact path="/" component={PostList} />
+          <Route exact path='/:category/:id' component={PostDetail} />
         </Switch>
       </div>
     );

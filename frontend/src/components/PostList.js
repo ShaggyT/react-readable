@@ -2,6 +2,8 @@ import React ,  { Component } from 'react'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import { getPosts } from '../actions/posts'
 import { connect } from 'react-redux'
+import { formattedDate, capitalize } from '../utils/helpers'
+import { Link } from 'react-router-dom'
 
 class PostList extends Component {
   componentDidMount () {
@@ -18,10 +20,17 @@ class PostList extends Component {
            posts.map((post, index) => (
              <ListGroupItem
                key={index}
-               style={styles.postItem} header={post.title}>{post.body}</ListGroupItem>
+               style={styles.postItem} header={post.title}
+               href={`/posts/${post.id}`}
+               >
+               <div style={{marginBottom: 10, marginTop: 10 }}>
+                 Category: <Link to={`/:${post.category}`}>
+                  {capitalize(post.category)}
+               </Link> | Posted At: {formattedDate(post.timestamp)}</div>
+               <div> By: <b>{post.author}</b> | {post.commentCount} comments</div>
+             </ListGroupItem>
           ))
         }
-
       </ListGroup>
     )
   }
