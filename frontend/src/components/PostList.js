@@ -6,31 +6,29 @@ import { formattedDate, capitalize } from '../utils/helpers'
 import { Link } from 'react-router-dom'
 
 class PostList extends Component {
-  componentDidMount () {
-    this.props.getPosts()
-  }
 
   render() {
+    const { category } = this.props
     const { posts } = this.props
     console.log("postssss", posts)
     return (
       <ListGroup style={styles.container}>
-        {
-          posts.length > 0 &&
-           posts.map((post, index) => (
-             <ListGroupItem
-               key={index}
-               style={styles.postItem} header={post.title}
-               href={`/posts/${post.id}`}
+        { posts.map((post, index) => (
+           <ListGroupItem
+             key={index}
+             style={styles.postItem} header={post.title}
+             href={`/posts/${post.id}`}
+             >
+             <div style={{marginBottom: 10, marginTop: 10 }}>
+               Category: <Link to={`/:${post.category}`}
+               style={{color: 'blue',}}
                >
-               <div style={{marginBottom: 10, marginTop: 10 }}>
-                 Category: <Link to={`/:${post.category}`}>
-                  {capitalize(post.category)}
-               </Link> | Posted At: {formattedDate(post.timestamp)}</div>
-               <div> By: <b>{post.author}</b> | {post.commentCount} comments</div>
-             </ListGroupItem>
-          ))
-        }
+                {capitalize(post.category)}
+             </Link> | Posted At: {formattedDate(post.timestamp)}</div>
+             <div> By: <b>{post.author}</b> | {post.commentCount} comments</div>
+           </ListGroupItem>
+        ))
+      }
       </ListGroup>
     )
   }
@@ -44,17 +42,12 @@ const styles = {
   postItem: {
     marginBottom: 10,
     borderRadius: 5,
+  },
+  noPost: {
+    textAlign: 'center',
+    padding: 20,
+
   }
 }
 
-function mapStateToProps ( posts ) {
-    return posts
-}
-
-function mapDispatchToProps (dispatch) {
-  return {
-    getPosts: (data) => dispatch(getPosts(data)),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PostList)
+export default PostList

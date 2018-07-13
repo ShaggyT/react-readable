@@ -9,6 +9,7 @@ class PostDetail extends Component {
   componentDidMount() {
     this.props.getPost(this.props.match.params.id)
   }
+
   render() {
     const { post } = this.props
     console.log("this is a post", post)
@@ -27,7 +28,10 @@ class PostDetail extends Component {
             {post.body}
           </p>
           <p style={{fontSize: 15}}>
-            Category: <Link to={`/:${post.category}`}>
+            Category: <Link
+              to={`/${post.category}`}
+              style={{color: 'blue',}}
+              >
              {capitalize(post.category)}
           </Link> | Posted At: {formattedDate(post.timestamp)}
           </p>

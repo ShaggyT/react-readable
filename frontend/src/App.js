@@ -4,6 +4,7 @@ import { fetchCategories, fetchPosts } from './utils/api'
 import { Route, Switch } from 'react-router-dom'
 import PostList from './components/PostList'
 import PostDetail from './components/PostDetail'
+import PostIndexPage from './components/PostIndexPage'
 
 class App extends Component {
 
@@ -17,7 +18,8 @@ class App extends Component {
       <div className="App">
         <NavBar />
         <Switch>
-          <Route exact path="/" component={PostList} />
+          <Route exact path="/" component={PostIndexPage} />
+          <Route exact path="/:category" component={PostIndexPage} />
           <Route exact path='/:category/:id' component={PostDetail} />
         </Switch>
       </div>

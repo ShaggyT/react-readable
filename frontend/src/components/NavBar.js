@@ -16,7 +16,7 @@ class NavBar extends Component {
       <Navbar inverse collapseOnSelect style={styles.navbar}>
         <Navbar.Header >
           <Navbar.Brand >
-            <Link style={styles.header} to="/">Readable</Link>
+            <Link to="/" style={styles.header}>Readable</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
