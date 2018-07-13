@@ -1,9 +1,16 @@
 import React ,  { Component } from 'react'
-import { ListGroup, ListGroupItem } from 'react-bootstrap'
+import { ListGroup, ListGroupItem, Button } from 'react-bootstrap'
 import { formattedDate, capitalize, commentsCount } from '../utils/helpers'
 import { Link } from 'react-router-dom'
+import { deletePost } from '../actions/posts'
+import { connect } from 'react-redux'
+import TrashIcon from 'react-icons/lib/fa/trash'
 
 class PostList extends Component {
+
+  handleDelete = (id) => {
+    this.props.deletePost(id)
+  }
 
   render() {
     const { posts } = this.props
@@ -13,7 +20,7 @@ class PostList extends Component {
         { posts.map((post, index) => (
            <ListGroupItem
              key={index}
-             style={styles.postItem} header={post.title}
+             style={styles.postItem} header={capitalize(post.title)}
              href={`/posts/${post.id}`}
              >
              <div style={{marginBottom: 10, marginTop: 10 }}>
@@ -22,8 +29,14 @@ class PostList extends Component {
                >
                 {capitalize(post.category)}
              </Link> | Posted At: {formattedDate(post.timestamp)}</div>
-             <div> By: <b>{post.author}</b> | {commentsCount(post.commentCount)}</div>
-             <div> postId: <b>{post.id}</b> </div>
+             <div> By: <b>{post.author}</b> | {commentsCount(post.commentCount)} | </div>
+             <Button
+               href="/"
+               onClick={() => this.handleDelete(post.id)}
+               bsSize="small"
+               style={{marginTop: 10 }}>
+               Delete
+             </Button>
            </ListGroupItem>
         ))
       }
@@ -48,4 +61,10 @@ const styles = {
   }
 }
 
-export default PostList
+function mapDispatchToProps (dispatch) {
+  return {
+    deletePost: (id) => dispatch(deletePost(id)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(PostList)
