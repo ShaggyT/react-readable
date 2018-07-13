@@ -2,7 +2,8 @@ import React ,  { Component } from 'react'
 import PostList from './PostList'
 import { getPosts } from '../actions/posts'
 import { connect } from 'react-redux'
-import { formattedDate, capitalize } from '../utils/helpers'
+import { capitalize } from '../utils/helpers'
+import { PageHeader, Button } from 'react-bootstrap'
 
 class PostIndexPage extends Component {
   componentDidMount () {
@@ -20,7 +21,17 @@ class PostIndexPage extends Component {
     if(posts.length > 0) {
       return(
         <div style={styles.container}>
-          <h3 style={styles.header}>Posts</h3>
+
+          <PageHeader style={styles.header}>
+          <small>Posts</small>
+          <Button
+            href="/posts/new"
+            style={styles.button}
+            bsSize="small pull-right"
+            onClick={this.addPost}
+            >Add Post
+          </Button>
+          </PageHeader>
           <PostList
             posts={posts}
             category={category}
@@ -42,6 +53,7 @@ class PostIndexPage extends Component {
     const { category } = this.props.match.params
 
     return (
+
       <div >
         {this.showPosts(posts, category)}
       </div>
@@ -62,6 +74,11 @@ const styles = {
   header: {
     marginLeft: 10,
     marginBottom: 20,
+  },
+  button: {
+    backgroundColor: "#BC8F8F",
+    borderColor: "#BC8F8F",
+    color: "#fff"
   }
 }
 

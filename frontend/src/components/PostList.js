@@ -1,14 +1,11 @@
 import React ,  { Component } from 'react'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
-import { getPosts } from '../actions/posts'
-import { connect } from 'react-redux'
-import { formattedDate, capitalize } from '../utils/helpers'
+import { formattedDate, capitalize, commentsCount } from '../utils/helpers'
 import { Link } from 'react-router-dom'
 
 class PostList extends Component {
 
   render() {
-    const { category } = this.props
     const { posts } = this.props
     console.log("postssss", posts)
     return (
@@ -25,7 +22,8 @@ class PostList extends Component {
                >
                 {capitalize(post.category)}
              </Link> | Posted At: {formattedDate(post.timestamp)}</div>
-             <div> By: <b>{post.author}</b> | {post.commentCount} comments</div>
+             <div> By: <b>{post.author}</b> | {commentsCount(post.commentCount)}</div>
+             <div> postId: <b>{post.id}</b> </div>
            </ListGroupItem>
         ))
       }

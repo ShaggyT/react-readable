@@ -3,7 +3,7 @@ import { getPost } from '../actions/posts'
 import { connect } from 'react-redux'
 import { Jumbotron, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { formattedDate, capitalize } from '../utils/helpers'
+import { formattedDate, capitalize, commentsCount } from '../utils/helpers'
 
 class PostDetail extends Component {
   componentDidMount() {
@@ -24,9 +24,9 @@ class PostDetail extends Component {
       <Jumbotron style={styles.container}>
         <div style={styles.innerContainer}>
           <h3>{post.title}</h3>
-          <p style={{fontSize: 15}}>
+          <h4 >
             {post.body}
-          </p>
+          </h4>
           <p style={{fontSize: 15}}>
             Category: <Link
               to={`/${post.category}`}
@@ -36,11 +36,11 @@ class PostDetail extends Component {
           </Link> | Posted At: {formattedDate(post.timestamp)}
           </p>
           <p style={{fontSize: 15}}>
-            By: <b>{post.author}</b> | {post.commentCount} comments
+            By: <b>{post.author}</b> | {commentsCount(post.commentCount)}
           </p>
           <p>
-            <Button style={{ width: 70 , marginRight:5}} bsStyle="primary">Edit</Button>
-            <Button style={{ width: 70 }} bsStyle="danger">Delete</Button>
+            <Button style={{ width: 70 , marginRight:5}}>Edit</Button>
+            <Button style={{ width: 70 }}>Delete</Button>
           </p>
         </div>
       </Jumbotron>

@@ -13,7 +13,7 @@ class NavBar extends Component {
   render() {
     const { categories } = this.props
     return (
-      <Navbar inverse collapseOnSelect style={styles.navbar}>
+      <Navbar collapseOnSelect style={styles.navbar}>
         <Navbar.Header >
           <Navbar.Brand >
             <Link to="/" style={styles.header}>Readable</Link>
@@ -22,8 +22,11 @@ class NavBar extends Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            <NavDropdown eventKey={1}
-               title="Categories" id="basic-nav-dropdown">
+            <NavDropdown
+               eventKey={1}
+               title="Categories"
+               id="basic-nav-dropdown"
+               >
               <MenuItem eventKey={1.1} href="/"> All </MenuItem>
               {
                 categories.length > 0 &&
@@ -48,10 +51,14 @@ class NavBar extends Component {
 const styles= {
   navbar: {
     borderRadius: 0,
-    // backgroundColor: "#BC8F8F",
-    // borderColor: "#BC8F8F",
+    backgroundColor: "#BC8F8F",
+    borderColor: "#BC8F8F",
+
   },
   header: {
+    color: "#fff"
+  },
+  text: {
     color: "#fff"
   }
 }
@@ -63,7 +70,7 @@ function mapStateToProps ( categories ) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    getCategories: (data) => dispatch(getCategories(data)),
+    getCategories: () => dispatch(getCategories()),
   }
 }
 
