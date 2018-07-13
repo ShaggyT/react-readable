@@ -2,9 +2,7 @@ import React ,  { Component } from 'react'
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap'
 import { formattedDate, capitalize, commentsCount } from '../utils/helpers'
 import { Link } from 'react-router-dom'
-import { deletePost } from '../actions/posts'
-import { connect } from 'react-redux'
-import TrashIcon from 'react-icons/lib/fa/trash'
+import DeletePostButton from './DeletePostButton'
 
 class PostList extends Component {
 
@@ -30,13 +28,7 @@ class PostList extends Component {
                 {capitalize(post.category)}
              </Link> | Posted At: {formattedDate(post.timestamp)}</div>
              <div> By: <b>{post.author}</b> | {commentsCount(post.commentCount)} | </div>
-             <Button
-               href="/"
-               onClick={() => this.handleDelete(post.id)}
-               bsSize="small"
-               style={{marginTop: 10 }}>
-               Delete
-             </Button>
+             <DeletePostButton post={post}/>
            </ListGroupItem>
         ))
       }
@@ -61,10 +53,4 @@ const styles = {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    deletePost: (id) => dispatch(deletePost(id)),
-  }
-}
-
-export default connect(null, mapDispatchToProps)(PostList)
+export default PostList

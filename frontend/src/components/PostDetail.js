@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Jumbotron, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { formattedDate, capitalize, commentsCount } from '../utils/helpers'
+import DeletePostButton from './DeletePostButton'
 
 class PostDetail extends Component {
   componentDidMount() {
@@ -40,7 +41,7 @@ class PostDetail extends Component {
           </p>
           <p>
             <Button style={{ width: 70 , marginRight:5}}>Edit</Button>
-            <Button style={{ width: 70 }}>Delete</Button>
+            <DeletePostButton post={post}/>
           </p>
         </div>
       </Jumbotron>
