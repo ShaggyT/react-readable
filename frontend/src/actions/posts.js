@@ -1,5 +1,5 @@
 import * as API from '../utils/api'
-import { GET_POSTS, GET_POST, ADD_POST, DELETE_POST } from './types'
+import { GET_POSTS, GET_POST, ADD_POST, DELETE_POST, EDIT_POST } from './types'
 
 export const getPosts = (category) => dispatch => (
   API
@@ -28,12 +28,20 @@ export const addPost = (post) => dispatch => (
     }))
 )
 
-
 export const deletePost = (id) => dispatch => (
   API
     .deletePost(id)
     .then( post => dispatch({
       type: DELETE_POST,
       id
+    }))
+)
+
+export const editPost = (post) => dispatch => (
+  API
+    .editPost(post)
+    .then( post => dispatch({
+      type: EDIT_POST,
+      post
     }))
 )

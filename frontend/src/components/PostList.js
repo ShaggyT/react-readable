@@ -3,6 +3,7 @@ import { ListGroup, ListGroupItem, Button } from 'react-bootstrap'
 import { formattedDate, capitalize, commentsCount } from '../utils/helpers'
 import { Link } from 'react-router-dom'
 import DeletePostButton from './DeletePostButton'
+import EditPostButton from './EditPostButton'
 
 class PostList extends Component {
 
@@ -29,6 +30,7 @@ class PostList extends Component {
              </Link> | Posted At: {formattedDate(post.timestamp)}</div>
              <div> By: <b>{post.author}</b> | {commentsCount(post.commentCount)} | </div>
              <DeletePostButton post={post}/>
+             <EditPostButton post={post} />
            </ListGroupItem>
         ))
       }

@@ -19,6 +19,7 @@ class App extends Component {
         <NavBar />
         <Switch>
           <Route exact path='/posts/new' component={PostForm} />
+          <Route exact path='/edit' component={PostForm} />
           <Route exact path="/" component={PostIndexPage} />
           <Route exact path="/:category" component={PostIndexPage} />
           <Route exact path='/:category/:id' component={PostDetail} />

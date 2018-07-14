@@ -4,20 +4,23 @@ import { getCategories } from '../actions/categories'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { capitalize } from '../utils/helpers'
-import { addPost } from '../actions/posts'
+import { addPost, editPost } from '../actions/posts'
 import { v4 } from 'uuid'
 
 class PostForm extends Component {
   constructor(props) {
-    super(props);
+    super(props)
+    const { location } = props
+    const post = location.state ? location.state.post : null
 
     this.state = {
-      id: v4(),
-      title: '',
-      author: '',
-      category: 'react',
-      body: '',
-      timestamp: Date.now()
+      id: post ? post.id : v4(),
+      title: post ? post.title : '',
+      author: post ? post.author : '',
+      category: post ? post.category : 'react',
+      body: post ? post.body : '',
+      timestamp: Date.now(),
+      showEditForm: location.pathname === '/edit',
     }
   }
 
@@ -43,13 +46,18 @@ class PostForm extends Component {
 
     }
     // update redux: saving specific post into redux store
-    this.props.addPost(post)
+
+    if (this.state.showEditForm) {
+      return this.props.editPost(post)
+    }
+
+    return this.props.addPost(post)
 
   }
 
   render() {
     const { categories } = this.props
-    const { category, title, author,body, id } = this.state
+    const { category, title, author,body, id, showEditForm } = this.state
 
     return (
       <form style={styles.container}>
@@ -108,7 +116,15 @@ class PostForm extends Component {
           />
           <FormControl.Feedback />
         </FormGroup>
-
+        {showEditForm ?
+          <Button
+            href={`/${category}/${id}`}
+            onClick={this.createPost}
+            style={{ width: 70 }}
+            type="submit">
+            Update
+          </Button>
+        :
         <Button
           href={`/${category}/${id}`}
           onClick={this.createPost}
@@ -116,6 +132,7 @@ class PostForm extends Component {
           type="submit">
           Submit
         </Button>
+        }
         <Button style={styles.cancelBtn} type="reset" href="/">Cancel</Button>
       </form>
     );
@@ -142,6 +159,7 @@ function mapDispatchToProps (dispatch) {
   return {
     getCategories: () => dispatch(getCategories()),
     addPost: (post) => dispatch(addPost(post)),
+    editPost: (post) => dispatch(editPost(post)),
   }
 }
 

@@ -5,6 +5,7 @@ import { Jumbotron, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { formattedDate, capitalize, commentsCount } from '../utils/helpers'
 import DeletePostButton from './DeletePostButton'
+import EditPostButton from './EditPostButton'
 
 class PostDetail extends Component {
   componentDidMount() {
@@ -40,8 +41,8 @@ class PostDetail extends Component {
             By: <b>{post.author}</b> | {commentsCount(post.commentCount)}
           </p>
           <p>
-            <Button style={{ width: 70 , marginRight:5}}>Edit</Button>
             <DeletePostButton post={post}/>
+            <EditPostButton post={post} />
           </p>
         </div>
       </Jumbotron>
