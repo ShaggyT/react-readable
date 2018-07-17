@@ -19,6 +19,7 @@ export const getPost = (id) => dispatch => (
     }))
 )
 
+
 export const addPost = (post) => dispatch => (
   API
     .addPost(post)

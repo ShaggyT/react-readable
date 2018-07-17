@@ -1,6 +1,4 @@
 import React ,  { Component } from 'react'
-import { editPost } from '../actions/posts'
-import { connect } from 'react-redux'
 import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 

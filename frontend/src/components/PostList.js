@@ -1,5 +1,5 @@
 import React ,  { Component } from 'react'
-import { ListGroup, ListGroupItem, Button } from 'react-bootstrap'
+import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import { formattedDate, capitalize, commentsCount } from '../utils/helpers'
 import { Link } from 'react-router-dom'
 import DeletePostButton from './DeletePostButton'
@@ -13,7 +13,6 @@ class PostList extends Component {
 
   render() {
     const { posts } = this.props
-    console.log("postssss", posts)
     return (
       <ListGroup style={styles.container}>
         { posts.map((post, index) => (

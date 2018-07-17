@@ -1,20 +1,27 @@
 import React ,  { Component } from 'react'
 import { getPost } from '../actions/posts'
 import { connect } from 'react-redux'
-import { Jumbotron, Button } from 'react-bootstrap'
+import { Jumbotron } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { formattedDate, capitalize, commentsCount } from '../utils/helpers'
 import DeletePostButton from './DeletePostButton'
 import EditPostButton from './EditPostButton'
+import CommentIndexPage from './CommentIndexPage'
+import { getComments } from '../actions/comments'
+
 
 class PostDetail extends Component {
   componentDidMount() {
-    this.props.getPost(this.props.match.params.id)
+    const { id } = this.props.match.params
+    console.log("idddd", id)
+    this.props.getPost(id)
+    this.props.getComments(id)
   }
 
   render() {
-    const { post } = this.props
+    const { post, comments } = this.props
     console.log("this is a post", post)
+    console.log("this is a comment", comments)
 
     if (!post.id) {
       return(
@@ -23,29 +30,37 @@ class PostDetail extends Component {
     }
 
     return(
-      <Jumbotron style={styles.container}>
-        <div style={styles.innerContainer}>
-          <h3>{post.title}</h3>
-          <h4 >
-            {post.body}
-          </h4>
-          <p style={{fontSize: 15}}>
-            Category: <Link
-              to={`/${post.category}`}
-              style={{color: 'blue',}}
-              >
-             {capitalize(post.category)}
-          </Link> | Posted At: {formattedDate(post.timestamp)}
-          </p>
-          <p style={{fontSize: 15}}>
-            By: <b>{post.author}</b> | {commentsCount(post.commentCount)}
-          </p>
-          <p>
-            <DeletePostButton post={post}/>
-            <EditPostButton post={post} />
-          </p>
-        </div>
-      </Jumbotron>
+      <div>
+        <Jumbotron style={styles.container}>
+          <div style={styles.innerContainer}>
+            <h3>{post.title}</h3>
+            <h4 >
+              {post.body}
+            </h4>
+            <p style={{fontSize: 15}}>
+              Category: <Link
+                to={`/${post.category}`}
+                style={{color: 'blue',}}
+                >
+               {capitalize(post.category)}
+            </Link> | Posted At: {formattedDate(post.timestamp)}
+            </p>
+            <p style={{fontSize: 15}}>
+              By: <b>{post.author}</b> | {commentsCount(post.commentCount)}
+            </p>
+            <p>
+              <DeletePostButton post={post}/>
+              <EditPostButton post={post} />
+            </p>
+          </div>
+        </Jumbotron>
+        {post &&
+          <CommentIndexPage
+            postId={post.id}
+            comments={comments}
+          />
+        }
+      </div>
     )
   }
 }
@@ -60,17 +75,34 @@ const styles = {
   innerContainer: {
     marginRight: 10,
     marginLeft: 10,
+  },
+  // noComment: {
+  //   textAlign: 'center',
+  //   padding: 20,
+  // },
+  header: {
+    marginLeft: 10,
+    marginBottom: 20,
+  },
+  button: {
+    backgroundColor: "#BC8F8F",
+    borderColor: "#BC8F8F",
+    color: "#fff"
   }
 }
 
-function mapStateToProps ( post ) {
-    return post
-}
+const mapStateToProps = ({ post, comments }) => ({
+  post: post,
+  comments: comments,
+})
 
 function mapDispatchToProps (dispatch) {
   return {
     getPost: id => dispatch(getPost(id)),
+    getComments: id => dispatch(getComments(id)),
   }
 }
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail)

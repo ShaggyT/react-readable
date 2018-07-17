@@ -70,3 +70,10 @@ export const editPost  = (post) => {
   }).then(res => res.json())
   .then(data => data)
 }
+
+
+// Comments
+export const fetchComments = (id) =>
+  fetch(`${api}/posts/${id}/comments`, { headers })
+    .then(res => res.json())
+    .then(data => data)

@@ -21,13 +21,13 @@ class PostIndexPage extends Component {
     if(posts.length > 0) {
       return(
         <div style={styles.container}>
-
           <PageHeader style={styles.header}>
           <small>Posts</small>
           <Button
             href="/posts/new"
             style={styles.button}
-            bsSize="small pull-right"
+            className="pull-right"
+            bsSize="small"
             onClick={this.addPost}
             >Add Post
           </Button>
