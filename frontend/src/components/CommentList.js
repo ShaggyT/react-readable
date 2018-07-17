@@ -1,11 +1,12 @@
 import React ,  { Component } from 'react'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
 import { formattedDate, capitalize } from '../utils/helpers'
+import DeleteCommentButton from './DeleteCommentButton'
 
 class CommentList extends Component {
 
   render() {
-    const { comments } = this.props
+    const { comments, parentId } = this.props
     return (
       <ListGroup style={styles.container}>
         {comments.length === 0 ?
@@ -29,6 +30,7 @@ class CommentList extends Component {
                  <div style={{marginBottom: 10, marginTop: 10 }}> {capitalize(comment.body)}</div>
                  <div> Posted At: {formattedDate(comment.timestamp)}</div>
                  <div> By: <b>{comment.author}</b></div>
+                 <DeleteCommentButton id={parentId} comment={comment} />
                </ListGroupItem>
             ))
         }

@@ -76,10 +76,6 @@ const styles = {
     marginRight: 10,
     marginLeft: 10,
   },
-  // noComment: {
-  //   textAlign: 'center',
-  //   padding: 20,
-  // },
   header: {
     marginLeft: 10,
     marginBottom: 20,

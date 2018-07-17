@@ -27,7 +27,7 @@ class PostList extends Component {
                >
                 {capitalize(post.category)}
              </Link> | Posted At: {formattedDate(post.timestamp)}</div>
-             <div> By: <b>{post.author}</b> | {commentsCount(post.commentCount)} | </div>
+             <div> By: <b>{post.author}</b> | {commentsCount(post.commentCount)} </div>
              <DeletePostButton post={post}/>
              <EditPostButton post={post} />
            </ListGroupItem>
