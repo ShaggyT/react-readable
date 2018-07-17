@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom'
 import PostDetail from './components/PostDetail'
 import PostIndexPage from './components/PostIndexPage'
 import PostForm from './components/PostForm'
+import CommentForm from './components/CommentForm'
 
 class App extends Component {
 
@@ -19,6 +20,7 @@ class App extends Component {
       <div className="App">
         <NavBar />
         <Switch>
+          <Route exact path='/comments/new' component={CommentForm} />
           <Route exact path='/posts/new' component={PostForm} />
           <Route exact path='/edit' component={PostForm} />
           <Route exact path="/" component={PostIndexPage} />

@@ -1,25 +1,48 @@
 import React ,  { Component } from 'react'
 import { PageHeader, Button } from 'react-bootstrap'
 import CommentList from './CommentList'
+import CommentForm from './CommentForm'
 
 class CommentIndexPage extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showCommentForm: false,
+    }
+    this.openCommentForm = this.openCommentForm.bind(this)
+  }
+
+  openCommentForm = () => {
+    this.setState({
+      showCommentForm: true,
+    })
+  }
+
 
   render() {
     const {postId, comments } = this.props
+    const { showCommentForm } = this.state
 
     return (
       <div style={styles.container}>
         <PageHeader style={styles.header}>
         <small>Comments</small>
         <Button
-          // href="/posts/new"
+          href={`/posts/${postId}`}
           style={styles.button}
           className="pull-right"
           bsSize="small"
-          // onClick={this.addComment}
+          onClick={(event) => {
+            event.preventDefault();
+            this.openCommentForm();
+            }}
           >Add Comment
         </Button>
         </PageHeader>
+        {showCommentForm && <CommentForm
+        postId={postId}
+        /> }
+
         <CommentList
           parentId = { postId }
           comments = { comments }

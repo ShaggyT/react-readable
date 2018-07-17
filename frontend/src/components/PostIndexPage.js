@@ -28,7 +28,6 @@ class PostIndexPage extends Component {
             style={styles.button}
             className="pull-right"
             bsSize="small"
-            onClick={this.addPost}
             >Add Post
           </Button>
           </PageHeader>
