@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom'
 import { capitalize } from '../utils/helpers'
 import { addPost, editPost } from '../actions/posts'
 import { v4 } from 'uuid'
+import { Link } from 'react-router-dom'
 
 class PostForm extends Component {
   constructor(props) {
@@ -35,6 +36,7 @@ class PostForm extends Component {
   }
 
   createPost = () => {
+
     const  { id, title, author, category, body  }  = this.state
 
     const post = {
@@ -133,7 +135,9 @@ class PostForm extends Component {
           Submit
         </Button>
         }
-        <Button style={styles.cancelBtn} type="reset" href="/">Cancel</Button>
+        <Link to="/">
+          <Button style={styles.cancelBtn} type="reset">Cancel</Button>
+        </Link>
       </form>
     );
   }

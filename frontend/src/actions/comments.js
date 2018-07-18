@@ -1,5 +1,5 @@
 import * as API from '../utils/api'
-import { GET_COMMENTS, DELETE_COMMENT, ADD_COMMENT } from './types'
+import { GET_COMMENTS, DELETE_COMMENT, ADD_COMMENT, EDIT_COMMENT } from './types'
 
 export const getComments = (id) => dispatch => (
   API
@@ -26,6 +26,16 @@ export const addComment = (comment) => dispatch => (
     .addComment(comment)
     .then(comment => dispatch({
       type: ADD_COMMENT,
+      comment
+    }))
+)
+
+
+export const editComment = (comment) => dispatch => (
+  API
+    .editComment(comment)
+    .then( comment => dispatch({
+      type: EDIT_COMMENT,
       comment
     }))
 )

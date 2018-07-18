@@ -20,12 +20,11 @@ class App extends Component {
       <div className="App">
         <NavBar />
         <Switch>
-          <Route exact path='/comments/new' component={CommentForm} />
           <Route exact path='/posts/new' component={PostForm} />
           <Route exact path='/edit' component={PostForm} />
           <Route exact path="/" component={PostIndexPage} />
           <Route exact path="/:category" component={PostIndexPage} />
-          <Route exact path='/:category/:id' component={PostDetail} />
+          <Route exact path='/posts/:category/:id' component={PostDetail} />
         </Switch>
       </div>
     );

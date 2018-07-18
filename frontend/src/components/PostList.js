@@ -16,13 +16,14 @@ class PostList extends Component {
     return (
       <ListGroup style={styles.container}>
         { posts.map((post, index) => (
+          <Link to={`/posts/${post.category}/${post.id}`}
+            style={{textDecoration: 'none', color:'black'}}>
            <ListGroupItem
              key={index}
              style={styles.postItem} header={capitalize(post.title)}
-             href={`/posts/${post.id}`}
              >
              <div style={{marginBottom: 10, marginTop: 10 }}>
-               Category: <Link to={`/:${post.category}`}
+               Category: <Link to={`/${post.category}`}
                style={{color: 'blue',}}
                >
                 {capitalize(post.category)}
@@ -31,6 +32,7 @@ class PostList extends Component {
              <DeletePostButton post={post}/>
              <EditPostButton post={post} />
            </ListGroupItem>
+          </Link>
         ))
       }
       </ListGroup>

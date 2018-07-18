@@ -100,3 +100,18 @@ export const addComment  = (comment) =>
       ...comment,
     })
   }).then(res => res.json())
+
+
+export const editComment  = (comment) => {
+  return fetch(`${api}/comments/${comment.id}`, {
+    method: 'Put',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      ...comment,
+    })
+  }).then(res => res.json())
+  .then(data => data)
+}

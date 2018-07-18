@@ -10,6 +10,7 @@ class CommentIndexPage extends Component {
       showCommentForm: false,
     }
     this.openCommentForm = this.openCommentForm.bind(this)
+    this.closeCommentForm = this.closeCommentForm.bind(this)
   }
 
   openCommentForm = () => {
@@ -18,9 +19,15 @@ class CommentIndexPage extends Component {
     })
   }
 
+  closeCommentForm = () => {
+    this.setState({
+      showCommentForm: false,
+    })
+  }
+
 
   render() {
-    const {postId, comments } = this.props
+    const {postId, comments, category } = this.props
     const { showCommentForm } = this.state
 
     return (
@@ -28,7 +35,7 @@ class CommentIndexPage extends Component {
         <PageHeader style={styles.header}>
         <small>Comments</small>
         <Button
-          href={`/posts/${postId}`}
+          href={`/posts/${category}/${postId}`}
           style={styles.button}
           className="pull-right"
           bsSize="small"
@@ -39,13 +46,18 @@ class CommentIndexPage extends Component {
           >Add Comment
         </Button>
         </PageHeader>
-        {showCommentForm && <CommentForm
-        postId={postId}
+        {showCommentForm &&
+          <CommentForm
+            postId={postId}
+            category={category}
+            hideForm={this.closeCommentForm}
         /> }
-
         <CommentList
-          parentId = { postId }
-          comments = { comments }
+          parentId = {postId}
+          comments = {comments}
+          category={category}
+          showEditCommentForm={this.openCommentForm}
+          hideEditCommentForm={this.closeCommentForm}
         />
       </div>
     )

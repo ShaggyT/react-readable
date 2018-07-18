@@ -1,4 +1,4 @@
-import { GET_COMMENTS, DELETE_COMMENT, ADD_COMMENT } from '../actions/types'
+import { GET_COMMENTS, DELETE_COMMENT, ADD_COMMENT, EDIT_COMMENT } from '../actions/types'
 
 function comments (state = [], action) {
   const { comments, comment } = action
@@ -9,6 +9,11 @@ function comments (state = [], action) {
       return state.filter(comment => comment.id !== action.id)
     case ADD_COMMENT :
       return comment
+    case EDIT_COMMENT:
+     return {
+         ...state,
+         comments: state.comments.filter(comment => comment.id !== action.comment.id).concat(action.comment)
+       }
     default :
       return state
   }

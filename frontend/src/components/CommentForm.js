@@ -2,23 +2,22 @@ import React ,  { Component } from 'react'
 import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { addComment } from '../actions/comments'
+import { addComment, editComment } from '../actions/comments'
 import { v4 } from 'uuid'
+import { Link } from 'react-router-dom'
 
 class CommentForm extends Component {
   constructor(props) {
     super(props)
-    // const { location } = props
-    // const comment = location.state ? location.state.comment : null
+    const { postId, comment } = this.props
 
     this.state = {
-      id: v4(),
-      author: '',
-      body: '',
+      id: comment ? comment.id : v4(),
+      author: comment ? comment.author : '',
+      body: comment ? comment.body : '',
       timestamp: Date.now(),
     }
   }
-
 
   handleChange = (e) => {
     this.setState({
@@ -29,7 +28,7 @@ class CommentForm extends Component {
   createComment = () => {
     const postId = this.props.match.params.id;
 
-    const  { id,  author,  body  }  = this.state
+    const { id, author, body } = this.state
 
     const comment = {
       id: id,
@@ -38,14 +37,16 @@ class CommentForm extends Component {
       parentId: postId,
     }
     // update redux: saving specific post into redux store
-    return this.props.addComment(comment)
 
+    if (this.props.editMode) {
+       return this.props.editComment(comment)
+    }
+    return this.props.addComment(comment)
   }
 
   render() {
-    const { showForm } = this.state
     const { author,body, id } = this.state
-    const { postId } = this.props
+    const { postId, category, hideForm, editMode } = this.props
 
 
     return (
@@ -74,18 +75,19 @@ class CommentForm extends Component {
           />
           <FormControl.Feedback />
         </FormGroup>
+
         <Button
-          href={`/posts/${postId}`}
+          href={`/posts/${category}/${postId}`}
           onClick={this.createComment}
           style={{ width: 70 }}
           type="submit"
           style={{ marginBottom: 20 }}>
-          Submit
+          {editMode ? 'Update' : 'Submit '}
         </Button>
         <Button
           style={styles.cancelBtn}
           type="reset"
-          href={`/posts/${postId}`}
+          onClick={hideForm}
           >Cancel</Button>
       </form>
     );

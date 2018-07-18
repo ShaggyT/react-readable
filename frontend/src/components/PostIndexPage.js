@@ -4,6 +4,7 @@ import { getPosts } from '../actions/posts'
 import { connect } from 'react-redux'
 import { capitalize } from '../utils/helpers'
 import { PageHeader, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 class PostIndexPage extends Component {
   componentDidMount () {
@@ -23,13 +24,14 @@ class PostIndexPage extends Component {
         <div style={styles.container}>
           <PageHeader style={styles.header}>
           <small>Posts</small>
-          <Button
-            href="/posts/new"
-            style={styles.button}
-            className="pull-right"
-            bsSize="small"
-            >Add Post
-          </Button>
+          <Link to="/posts/new">
+            <Button
+              style={styles.button}
+              className="pull-right"
+              bsSize="small"
+              >Add Post
+            </Button>
+          </Link>
           </PageHeader>
           <PostList
             posts={posts}

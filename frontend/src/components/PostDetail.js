@@ -58,6 +58,7 @@ class PostDetail extends Component {
           <CommentIndexPage
             postId={post.id}
             comments={comments}
+            category={post.category}
           />
         }
       </div>
