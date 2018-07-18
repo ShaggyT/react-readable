@@ -7,13 +7,19 @@ class EditPostButton extends Component {
 
     const { post } = this.props
       return(
-        <Button
-          style={ styles.editBtn}>
-          <Link style={{color: "#050505", fontSize: 12, }} to={{ pathname: '/edit', state: { post } }}
-          >
+        <Link
+          to={{ pathname: '/edit', state: { post } }}
+          style={{color: "#050505", fontSize: 12 }}
+        >
+        {/* <Button style={ styles.editBtn}>
             Edit
-          </Link>
+        </Button> */}
+        <Button
+          bsSize="small"
+          style={styles.editBtn }>
+          Edit
         </Button>
+        </Link>
       )
 
   }
@@ -21,12 +27,13 @@ class EditPostButton extends Component {
 
 const styles = {
   editBtn: {
+    marginTop: 10,
     marginLeft: 10,
-    width: 55,
+    width: 58,
     marginTop: 10,
     height: 30,
     borderRadius: 3,
-
+    marginBottom: 1
   }
 }
 

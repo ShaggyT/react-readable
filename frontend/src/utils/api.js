@@ -72,6 +72,25 @@ export const editPost  = (post) => {
 }
 
 
+//  Vote Post
+// POST /posts/:id
+//   USAGE:
+//     Used for voting on a post
+//   PARAMS:
+//     option - String: Either "upVote" or "downVote"
+
+export const votePost = (id, option) => {
+  return fetch(`${api}/posts/${id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ option })
+  }).then(res => res.json())
+}
+
+
 // Comments
 export const fetchComments = (id) =>
   fetch(`${api}/posts/${id}/comments`, { headers })

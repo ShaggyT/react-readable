@@ -1,5 +1,12 @@
 import * as API from '../utils/api'
-import { GET_POSTS, GET_POST, ADD_POST, DELETE_POST, EDIT_POST } from './types'
+import {
+  GET_POSTS,
+  GET_POST,
+  ADD_POST,
+  DELETE_POST,
+  EDIT_POST,
+  VOTE_POST,
+ } from './types'
 
 export const getPosts = (category) => dispatch => (
   API
@@ -46,3 +53,14 @@ export const editPost = (post) => dispatch => (
       post
     }))
 )
+
+
+export const votePost = (id,option) => dispatch => (
+  API
+      .votePost(id,option)
+      .then(({id}) => dispatch({
+        type: VOTE_POST,
+        id,
+        option,
+      }))
+    )

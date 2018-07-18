@@ -31,18 +31,19 @@ class EditCommentButton extends Component {
     const { displayForm } = this.state;
     return(
       <span>
-        <Button style={ styles.editBtn}>
-          <Link
-            style={{color: "#050505", fontSize: 12, }}
-            to="#"
-            onClick={(event) => {
-            event.preventDefault();
-            this.showCommentForm();
-            }}
-          >
-            Edit
-          </Link>
-        </Button>
+        <Link
+          style={{color: "#050505", fontSize: 10, }}
+          to="#"
+          onClick={(event) => {
+          event.preventDefault();
+          this.showCommentForm();
+          }}>
+          <Button
+            bsSize="small"
+            style={styles.editBtn}>
+          Edit
+          </Button>
+        </Link>
 
         {displayForm &&
           <CommentForm
@@ -60,12 +61,13 @@ class EditCommentButton extends Component {
 
 const styles = {
   editBtn: {
+    marginTop: 10,
     marginLeft: 10,
-    width: 55,
+    width: 58,
     marginTop: 10,
     height: 30,
     borderRadius: 3,
-
+    marginBottom: 1
   }
 }
 

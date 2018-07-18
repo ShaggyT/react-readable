@@ -36,7 +36,6 @@ class PostForm extends Component {
   }
 
   createPost = () => {
-
     const  { id, title, author, category, body  }  = this.state
 
     const post = {
@@ -120,7 +119,7 @@ class PostForm extends Component {
         </FormGroup>
         {showEditForm ?
           <Button
-            href={`/${category}/${id}`}
+            href={`/posts/${category}/${id}`}
             onClick={this.createPost}
             style={{ width: 70 }}
             type="submit">
@@ -128,7 +127,7 @@ class PostForm extends Component {
           </Button>
         :
         <Button
-          href={`/${category}/${id}`}
+          href={`/posts/${category}/${id}`}
           onClick={this.createPost}
           style={{ width: 70 }}
           type="submit">

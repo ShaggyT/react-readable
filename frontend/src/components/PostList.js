@@ -4,6 +4,9 @@ import { formattedDate, capitalize, commentsCount } from '../utils/helpers'
 import { Link } from 'react-router-dom'
 import DeletePostButton from './DeletePostButton'
 import EditPostButton from './EditPostButton'
+import Vote from './Vote'
+import { votePost } from '../actions/posts'
+import { connect } from 'react-redux'
 
 class PostList extends Component {
 
@@ -12,10 +15,11 @@ class PostList extends Component {
   }
 
   render() {
-    const { posts } = this.props
+    const { posts, votePost } = this.props
     return (
       <ListGroup style={styles.container}>
         { posts.map((post, index) => (
+          <span>
           <Link to={`/posts/${post.category}/${post.id}`}
             style={{textDecoration: 'none', color:'black'}}>
            <ListGroupItem
@@ -28,11 +32,17 @@ class PostList extends Component {
                >
                 {capitalize(post.category)}
              </Link> | Posted At: {formattedDate(post.timestamp)}</div>
-             <div> By: <b>{post.author}</b> | {commentsCount(post.commentCount)} </div>
+             <div> By: <b>{post.author}</b> | {commentsCount(post.commentCount)} | <Vote
+               onUpvote={() => votePost(post.id, "upVote")}
+               onDownvote={() => votePost(post.id, "downVote")}
+               voteScore={post.voteScore}
+               post={post} />
+             </div>
              <DeletePostButton post={post}/>
              <EditPostButton post={post} />
            </ListGroupItem>
           </Link>
+         </span>
         ))
       }
       </ListGroup>
@@ -56,4 +66,7 @@ const styles = {
   }
 }
 
-export default PostList
+export default connect(
+  undefined,
+  { votePost: votePost }
+)(PostList)

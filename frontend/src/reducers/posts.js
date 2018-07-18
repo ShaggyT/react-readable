@@ -1,4 +1,11 @@
-import { GET_POSTS, GET_POST, ADD_POST, DELETE_POST, EDIT_POST } from '../actions/types'
+import {
+  GET_POSTS,
+  GET_POST,
+  ADD_POST,
+  DELETE_POST,
+  EDIT_POST,
+  VOTE_POST
+} from '../actions/types'
 
 function posts (state = {}, action) {
   const { posts, post } = action
@@ -8,12 +15,26 @@ function posts (state = {}, action) {
     case ADD_POST :
       return post
     case DELETE_POST :
-      return state.filter(post => post.id !== action.id)
+      return [
+        ...state.filter(post => post.id !== action.id)
+      ]
     case EDIT_POST:
        return {
            ...state,
            posts: state.posts.filter(post => post.id !== action.post.id).concat(action.post)
        }
+   case VOTE_POST:
+     return state.map(post => {
+       if (post.id === action.id) {
+         if (action.option === "upVote") {
+           post.voteScore += 1
+         }
+         if (action.option === "downVote") {
+           post.voteScore -= 1
+         }
+       }
+       return post
+     })
     default :
       return state
   }

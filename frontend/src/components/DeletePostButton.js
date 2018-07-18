@@ -2,6 +2,7 @@ import React ,  { Component } from 'react'
 import { deletePost } from '../actions/posts'
 import { connect } from 'react-redux'
 import { Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 class DeletePostButton extends Component {
   handleDelete = (id) => {
@@ -10,13 +11,16 @@ class DeletePostButton extends Component {
   render() {
     const { post } = this.props
     return(
-      <Button
-        href="/"
+      <Link
+        to='/'
         onClick={() => this.handleDelete(post.id)}
-        bsSize="small"
-        style={{marginTop: 10 }}>
-        Delete
-      </Button>
+      >
+        <Button
+          bsSize="small"
+          style={{marginTop: 10 }}>
+          Delete
+        </Button>
+      </Link>
     )
   }
 }
