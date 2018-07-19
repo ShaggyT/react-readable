@@ -91,6 +91,7 @@ const styles = {
 const mapStateToProps = ({ post, comments }) => ({
   post: post,
   comments: comments,
+
 })
 
 function mapDispatchToProps (dispatch) {

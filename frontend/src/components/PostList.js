@@ -35,8 +35,7 @@ class PostList extends Component {
              <div> By: <b>{post.author}</b> | {commentsCount(post.commentCount)} | <Vote
                onUpvote={() => votePost(post.id, "upVote")}
                onDownvote={() => votePost(post.id, "downVote")}
-               voteScore={post.voteScore}
-               post={post} />
+               voteScore={post.voteScore}/>
              </div>
              <DeletePostButton post={post}/>
              <EditPostButton post={post} />

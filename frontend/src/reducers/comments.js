@@ -1,4 +1,10 @@
-import { GET_COMMENTS, DELETE_COMMENT, ADD_COMMENT, EDIT_COMMENT } from '../actions/types'
+import {
+  GET_COMMENTS,
+  DELETE_COMMENT,
+  ADD_COMMENT,
+  EDIT_COMMENT,
+  VOTE_COMMENT,
+} from '../actions/types'
 
 function comments (state = [], action) {
   const { comments, comment } = action
@@ -14,6 +20,18 @@ function comments (state = [], action) {
          ...state,
          comments: state.comments.filter(comment => comment.id !== action.comment.id).concat(action.comment)
        }
+     case VOTE_COMMENT:
+       return state.map(comment => {
+         if (comment.id === action.id) {
+           if (action.option === "upVote") {
+             comment.voteScore += 1
+           }
+           if (action.option === "downVote") {
+             comment.voteScore -= 1
+           }
+         }
+         return comment
+       })
     default :
       return state
   }
