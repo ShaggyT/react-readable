@@ -4,11 +4,11 @@ import {
   ADD_POST,
   DELETE_POST,
   EDIT_POST,
-  VOTE_POST
+  VOTE_POST,
 } from '../actions/types'
 
 function posts (state = {}, action) {
-  const { posts, post } = action
+  const { posts, post, sortOption } = action
   switch (action.type) {
     case GET_POSTS :
       return posts
@@ -40,6 +40,7 @@ function posts (state = {}, action) {
   }
 }
 
+
 function post (state = {}, action) {
   const { post } = action
   switch (action.type) {
@@ -50,4 +51,4 @@ function post (state = {}, action) {
   }
 }
 
-export {post, posts}
+export { post, posts }

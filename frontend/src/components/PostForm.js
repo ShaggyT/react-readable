@@ -44,7 +44,7 @@ class PostForm extends Component {
       author: author,
       category: category,
       body: body,
-
+      timestamp: Date.now(),
     }
     // update redux: saving specific post into redux store
 
@@ -118,21 +118,23 @@ class PostForm extends Component {
           <FormControl.Feedback />
         </FormGroup>
         {showEditForm ?
+          <Link to={`/posts/${category}/${id}`}>
+            <Button
+              onClick={this.createPost}
+              style={{ width: 70 }}
+              type="submit">
+              Update
+            </Button>
+          </Link>
+        :
+        <Link to={`/posts/${category}/${id}`}>
           <Button
-            href={`/posts/${category}/${id}`}
             onClick={this.createPost}
             style={{ width: 70 }}
             type="submit">
-            Update
+            Submit
           </Button>
-        :
-        <Button
-          href={`/posts/${category}/${id}`}
-          onClick={this.createPost}
-          style={{ width: 70 }}
-          type="submit">
-          Submit
-        </Button>
+        </Link>
         }
         <Link to="/">
           <Button style={styles.cancelBtn} type="reset">Cancel</Button>

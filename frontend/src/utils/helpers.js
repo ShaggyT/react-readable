@@ -16,3 +16,19 @@ export const formattedDate = (date)=> {
 export function commentsCount (commentsCount) {
   return commentsCount === 1 ? '1 comment' : `${commentsCount} comments`
 }
+
+
+export const sortByDateAscending = (data) => {
+  return data.sort((a, b) =>   b.timestamp - a.timestamp  )
+}
+export const sortByDateDescending = (data) => {
+  return data.sort((a, b) =>   a.timestamp - b.timestamp  )
+}
+
+export const sortByVotesAscending = (data) => {
+  return data.sort((a, b) => b.voteScore -  a.voteScore )
+}
+
+export const sortByVotesDescending = (data) => {
+  return data.sort((a, b) => a.voteScore  - b.voteScore  )
+}

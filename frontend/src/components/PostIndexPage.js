@@ -5,8 +5,13 @@ import { connect } from 'react-redux'
 import { capitalize } from '../utils/helpers'
 import { PageHeader, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import Sort from './Sort'
 
 class PostIndexPage extends Component {
+  state = {
+    sortBy: 'date'
+  }
+
   componentDidMount () {
     const { category } = this.props.match.params
     this.props.getPosts(category)
@@ -18,12 +23,17 @@ class PostIndexPage extends Component {
     }
   }
 
+  changeSort = (sortBy) => {
+    this.setState({ sortBy })
+  }
+
   showPosts = (posts,category) =>{
     if(posts.length > 0) {
       return(
         <div style={styles.container}>
           <PageHeader style={styles.header}>
           <small>Posts</small>
+
           <Link to="/posts/new">
             <Button
               style={styles.button}
@@ -32,8 +42,12 @@ class PostIndexPage extends Component {
               >Add Post
             </Button>
           </Link>
+          <Sort
+            isPost="true"
+            onChange={this.changeSort}/>
           </PageHeader>
           <PostList
+            sortBy={this.state.sortBy}
             posts={posts}
             category={category}
           />
@@ -54,8 +68,7 @@ class PostIndexPage extends Component {
     const { category } = this.props.match.params
 
     return (
-
-      <div >
+      <div>
         {this.showPosts(posts, category)}
       </div>
     )

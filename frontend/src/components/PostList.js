@@ -1,6 +1,6 @@
 import React ,  { Component } from 'react'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
-import { formattedDate, capitalize, commentsCount } from '../utils/helpers'
+import { formattedDate, capitalize, commentsCount, sortByDateAscending , sortByDateDescending, sortByVotesAscending, sortByVotesDescending } from '../utils/helpers'
 import { Link } from 'react-router-dom'
 import DeletePostButton from './DeletePostButton'
 import EditPostButton from './EditPostButton'
@@ -10,15 +10,28 @@ import { connect } from 'react-redux'
 
 class PostList extends Component {
 
+  sortPosts = (posts, sortBy) => {
+    if (sortBy === "date-ascending" ) {
+      return sortByDateAscending(posts)
+    } else if(sortBy === "date-descending"){
+      return sortByDateDescending(posts)
+    } else if(sortBy === "votes-ascending"){
+      return sortByVotesAscending(posts)
+    } else{
+      return sortByVotesDescending(posts)
+    }
+  }
+
   handleDelete = (id) => {
     this.props.deletePost(id)
   }
 
   render() {
-    const { posts, votePost } = this.props
+    const { posts, votePost, sortBy } = this.props
+
     return (
       <ListGroup style={styles.container}>
-        { posts.map((post, index) => (
+        { this.sortPosts(posts, sortBy).map((post, index) => (
           <span>
           <Link to={`/posts/${post.category}/${post.id}`}
             style={{textDecoration: 'none', color:'black'}}>
