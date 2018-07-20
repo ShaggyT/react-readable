@@ -6,12 +6,9 @@ class Sort extends Component {
     const { onChange, isPost } = this.props
     return (
       <div>
-        {isPost ?
-          <span style={{fontSize: 14, color: "#BC8F8F" }}>Sort Posts By: &nbsp; </span>
-        :
-          <span style={{fontSize: 14, color: "#BC8F8F" }}>Sort Comments By: &nbsp; </span>
-        }
         <DropdownButton
+          title={isPost ? "Sort Posts" : "Sort Comments" }
+          id={isPost ? "sort-posts" : "sort-comments" }
           onSelect={(sortOption) => onChange(sortOption)}
           style={{marginTop: 10, color: "#BC8F8F"}}>
           <MenuItem

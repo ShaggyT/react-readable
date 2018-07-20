@@ -17,7 +17,6 @@ export function commentsCount (commentsCount) {
   return commentsCount === 1 ? '1 comment' : `${commentsCount} comments`
 }
 
-
 export const sortByDateAscending = (data) => {
   return data.sort((a, b) =>   b.timestamp - a.timestamp  )
 }

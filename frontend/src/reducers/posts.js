@@ -8,7 +8,7 @@ import {
 } from '../actions/types'
 
 function posts (state = {}, action) {
-  const { posts, post, sortOption } = action
+  const { posts, post } = action
   switch (action.type) {
     case GET_POSTS :
       return posts

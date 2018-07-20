@@ -5,16 +5,6 @@ import CommentForm from './CommentForm'
 import Sort from './Sort'
 
 class CommentIndexPage extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     showCommentForm: false,
-  //     sortBy: 'date'
-  //   }
-  //   this.openCommentForm = this.openCommentForm.bind(this)
-  //   this.closeCommentForm = this.closeCommentForm.bind(this)
-  // }
-
   state = {
     showCommentForm: false,
     sortBy: 'date'

@@ -9,16 +9,12 @@ class EditPostButton extends Component {
       return(
         <Link
           to={{ pathname: '/edit', state: { post } }}
-          style={{color: "#050505", fontSize: 12 }}
-        >
-        {/* <Button style={ styles.editBtn}>
+          style={{color: "#050505", fontSize: 12 }}>
+          <Button
+            bsSize="small"
+            style={styles.editBtn }>
             Edit
-        </Button> */}
-        <Button
-          bsSize="small"
-          style={styles.editBtn }>
-          Edit
-        </Button>
+          </Button>
         </Link>
       )
 
@@ -30,7 +26,6 @@ const styles = {
     marginTop: 10,
     marginLeft: 10,
     width: 58,
-    marginTop: 10,
     height: 30,
     borderRadius: 3,
     marginBottom: 1

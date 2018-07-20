@@ -5,7 +5,6 @@ import { Route, Switch } from 'react-router-dom'
 import PostDetail from './components/PostDetail'
 import PostIndexPage from './components/PostIndexPage'
 import PostForm from './components/PostForm'
-import CommentForm from './components/CommentForm'
 
 class App extends Component {
 

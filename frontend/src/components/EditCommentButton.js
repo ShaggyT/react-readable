@@ -64,7 +64,6 @@ const styles = {
     marginTop: 10,
     marginLeft: 10,
     width: 58,
-    marginTop: 10,
     height: 30,
     borderRadius: 3,
     marginBottom: 1

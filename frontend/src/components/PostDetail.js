@@ -13,16 +13,12 @@ import { getComments } from '../actions/comments'
 class PostDetail extends Component {
   componentDidMount() {
     const { id } = this.props.match.params
-    console.log("idddd", id)
     this.props.getPost(id)
     this.props.getComments(id)
   }
 
   render() {
     const { post, comments } = this.props
-    console.log("this is a post", post)
-    console.log("this is a comment", comments)
-
     if (!post.id) {
       return(
         <div> </div>

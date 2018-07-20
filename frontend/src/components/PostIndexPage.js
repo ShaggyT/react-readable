@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import Sort from './Sort'
 
 class PostIndexPage extends Component {
+
   state = {
     sortBy: 'date'
   }

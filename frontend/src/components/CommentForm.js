@@ -4,12 +4,11 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { addComment, editComment } from '../actions/comments'
 import { v4 } from 'uuid'
-import { Link } from 'react-router-dom'
 
 class CommentForm extends Component {
   constructor(props) {
     super(props)
-    const { postId, comment } = this.props
+    const { comment } = this.props
 
     this.state = {
       id: comment ? comment.id : v4(),
@@ -46,7 +45,7 @@ class CommentForm extends Component {
   }
 
   render() {
-    const { author,body, id } = this.state
+    const { author,body } = this.state
     const { postId, category, hideForm, editMode } = this.props
 
 
@@ -80,9 +79,8 @@ class CommentForm extends Component {
         <Button
           href={`/posts/${category}/${postId}`}
           onClick={this.createComment}
-          style={{ width: 70 }}
           type="submit"
-          style={{ marginBottom: 20 }}>
+          style={{ width: 70 , marginBottom: 20 }}>
           {editMode ? 'Update' : 'Submit '}
         </Button>
 

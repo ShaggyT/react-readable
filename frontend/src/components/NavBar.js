@@ -54,7 +54,6 @@ const styles= {
     borderRadius: 0,
     backgroundColor: "#BC8F8F",
     borderColor: "#BC8F8F",
-
   },
   header: {
     color: "#fff"
