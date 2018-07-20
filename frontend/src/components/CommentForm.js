@@ -84,11 +84,13 @@ class CommentForm extends Component {
           style={{ marginBottom: 20 }}>
           {editMode ? 'Update' : 'Submit '}
         </Button>
+
         <Button
           style={styles.cancelBtn}
           type="reset"
           onClick={hideForm}
-          >Cancel</Button>
+          >Cancel
+        </Button>
       </form>
     );
   }

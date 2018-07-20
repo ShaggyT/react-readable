@@ -2,15 +2,22 @@ import React ,  { Component } from 'react'
 import { PageHeader, Button } from 'react-bootstrap'
 import CommentList from './CommentList'
 import CommentForm from './CommentForm'
+import Sort from './Sort'
 
 class CommentIndexPage extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      showCommentForm: false,
-    }
-    this.openCommentForm = this.openCommentForm.bind(this)
-    this.closeCommentForm = this.closeCommentForm.bind(this)
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     showCommentForm: false,
+  //     sortBy: 'date'
+  //   }
+  //   this.openCommentForm = this.openCommentForm.bind(this)
+  //   this.closeCommentForm = this.closeCommentForm.bind(this)
+  // }
+
+  state = {
+    showCommentForm: false,
+    sortBy: 'date'
   }
 
   openCommentForm = () => {
@@ -25,6 +32,9 @@ class CommentIndexPage extends Component {
     })
   }
 
+  changeSort = (sortBy) => {
+    this.setState({ sortBy })
+  }
 
   render() {
     const {postId, comments, category } = this.props
@@ -45,6 +55,8 @@ class CommentIndexPage extends Component {
             }}
           >Add Comment
         </Button>
+        <Sort
+          onChange={this.changeSort}/>
         </PageHeader>
         {showCommentForm &&
           <CommentForm
@@ -53,6 +65,7 @@ class CommentIndexPage extends Component {
             hideForm={this.closeCommentForm}
         /> }
         <CommentList
+          sortBy={this.state.sortBy}
           parentId = {postId}
           comments = {comments}
           category={category}

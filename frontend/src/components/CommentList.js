@@ -1,6 +1,7 @@
 import React ,  { Component } from 'react'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
-import { formattedDate, capitalize } from '../utils/helpers'
+import { formattedDate, capitalize, sortByDateAscending, sortByDateDescending, sortByVotesAscending, sortByVotesDescending
+ } from '../utils/helpers'
 import DeleteCommentButton from './DeleteCommentButton'
 import EditCommentButton from './EditCommentButton'
 import Vote from './Vote'
@@ -9,8 +10,20 @@ import { connect } from 'react-redux'
 
 class CommentList extends Component {
 
+  sortComments = (comments, sortBy) => {
+    if (sortBy === "date-ascending" ) {
+      return sortByDateAscending(comments)
+    } else if(sortBy === "date-descending"){
+      return sortByDateDescending(comments)
+    } else if(sortBy === "votes-ascending"){
+      return sortByVotesAscending(comments)
+    } else{
+      return sortByVotesDescending(comments)
+    }
+  }
+
   render() {
-    const { comments, parentId, category,showEditCommentForm,hideEditCommentForm, voteComment } = this.props
+    const { comments, parentId, category,showEditCommentForm,hideEditCommentForm, voteComment, sortBy } = this.props
     return (
       <ListGroup style={styles.container}>
         {comments.length === 0 ?
@@ -21,7 +34,7 @@ class CommentList extends Component {
               <h4>No Comment</h4>
             </div>
             :
-            comments.map((comment, index) => (
+            this.sortComments(comments, sortBy).map((comment, index) => (
                <ListGroupItem
                  key={index}
                  style={styles.commentItem}
