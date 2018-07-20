@@ -35,6 +35,7 @@ class CommentForm extends Component {
       author: author,
       body: body,
       parentId: postId,
+      timestamp: Date.now(),
     }
     // update redux: saving specific post into redux store
 
@@ -111,6 +112,7 @@ const styles = {
 function mapDispatchToProps (dispatch) {
   return {
     addComment: (comment) => dispatch(addComment(comment)),
+    editComment: (comment) => dispatch(editComment(comment)),
   }
 }
 

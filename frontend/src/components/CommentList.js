@@ -29,8 +29,7 @@ class CommentList extends Component {
         {comments.length === 0 ?
             <div
               className="container"
-              style={{textAlign: 'center',
-                color: 'blue'}}>
+              style={{textAlign: 'center'}}>
               <h4>No Comment</h4>
             </div>
             :

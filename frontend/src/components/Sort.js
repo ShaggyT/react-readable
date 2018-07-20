@@ -7,9 +7,9 @@ class Sort extends Component {
     return (
       <div>
         {isPost ?
-          <span style={{fontSize: 14, color: "#BC8F8F" }}>Sort Post By: &nbsp; </span>
+          <span style={{fontSize: 14, color: "#BC8F8F" }}>Sort Posts By: &nbsp; </span>
         :
-          <span style={{fontSize: 14, color: "#BC8F8F" }}>Sort Comment By: &nbsp; </span>
+          <span style={{fontSize: 14, color: "#BC8F8F" }}>Sort Comments By: &nbsp; </span>
         }
         <DropdownButton
           onSelect={(sortOption) => onChange(sortOption)}

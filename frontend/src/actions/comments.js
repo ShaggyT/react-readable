@@ -37,14 +37,26 @@ export const addComment = (comment) => dispatch => (
 )
 
 
-export const editComment = (comment) => dispatch => (
-  API
-    .editComment(comment)
-    .then( comment => dispatch({
-      type: EDIT_COMMENT,
-      comment
-    }))
-)
+// export const editComment = (comment) => dispatch => (
+//   API
+//     .editComment(comment)
+//     .then( comment => dispatch({
+//       type: EDIT_COMMENT,
+//       comment
+//     }))
+// )
+
+
+export const editComment = (comment) => dispatch => {
+  return (
+    API
+        .editComment(comment)
+        .then(comment => dispatch({
+          type: EDIT_COMMENT,
+          comment
+        }))
+      )
+}
 
 export const voteComment = (id,option) => dispatch => (
   API

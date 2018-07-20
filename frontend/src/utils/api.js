@@ -135,7 +135,6 @@ export const editComment  = (comment) => {
   .then(data => data)
 }
 
-
 export const voteComment = (id, option) => {
   return fetch(`${api}/comments/${id}`, {
     method: 'POST',
