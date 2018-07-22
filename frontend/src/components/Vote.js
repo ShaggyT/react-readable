@@ -6,18 +6,24 @@ import { Link } from 'react-router-dom'
 class Vote extends Component {
 
   render() {
-    const { onUpvote, onDownvote, voteScore } = this.props
+    const { onVoteUp, onVoteDown, voteResult } = this.props
     return(
       <span>
-        <Link to='#' onClick={onUpvote}>
-          <ThumbsUpIcon style={{color: "#BC8F8F"}} />
+        <Link to='#' onClick={onVoteUp}>
+          <ThumbsUpIcon size={18} style={styles.icon} />
         </Link>
-        <span> &nbsp; {voteScore} &nbsp; </span>
-        <Link to='#' onClick={onDownvote}>
-          <ThumbsDownIcon style={{color: "#BC8F8F"}} />
+        <span> &nbsp; {voteResult} &nbsp; </span>
+        <Link to='#' onClick={onVoteDown}>
+          <ThumbsDownIcon size={18} style={styles.icon} />
         </Link>
       </span>
     )
+  }
+}
+
+const styles = {
+  icon: {
+    color: "#BC8F8F",
   }
 }
 

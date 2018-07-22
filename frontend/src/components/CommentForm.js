@@ -1,9 +1,10 @@
 import React ,  { Component } from 'react'
 import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { withRouter }from 'react-router-dom'
 import { addComment, editComment } from '../actions/comments'
 import { v4 } from 'uuid'
+import { Link } from 'react-router-dom'
 
 class CommentForm extends Component {
   constructor(props) {
@@ -12,9 +13,9 @@ class CommentForm extends Component {
 
     this.state = {
       id: comment ? comment.id : v4(),
-      author: comment ? comment.author : '',
-      body: comment ? comment.body : '',
       timestamp: Date.now(),
+      body: comment ? comment.body : '',
+      author: comment ? comment.author : '',
     }
   }
 
@@ -28,6 +29,7 @@ class CommentForm extends Component {
     const postId = this.props.match.params.id;
 
     const { id, author, body } = this.state
+    const { editComment, addComment, edit } = this.props
 
     const comment = {
       id: id,
@@ -38,16 +40,17 @@ class CommentForm extends Component {
     }
     // update redux: saving specific post into redux store
 
-    if (this.props.editMode) {
-       return this.props.editComment(comment)
+    if (edit) {
+       return editComment(comment)
+
     }
-    return this.props.addComment(comment)
+    return addComment(comment)
   }
 
   render() {
     const { author,body } = this.state
-    const { postId, category, hideForm, editMode } = this.props
-
+    const { closeForm, edit } = this.props
+    // const { postId, category } = this.props
 
     return (
       <form style={styles.container}>
@@ -62,7 +65,6 @@ class CommentForm extends Component {
             placeholder="What is your name?"
             onChange={this.handleChange}
           />
-          <FormControl.Feedback />
         </FormGroup>
         <FormGroup controlId="formBasicText">
           <ControlLabel>Comment</ControlLabel>
@@ -73,21 +75,19 @@ class CommentForm extends Component {
             placeholder="write your description"
             onChange={this.handleChange}
           />
-          <FormControl.Feedback />
         </FormGroup>
 
         <Button
-          href={`/posts/${category}/${postId}`}
           onClick={this.createComment}
           type="submit"
           style={{ width: 70 , marginBottom: 20 }}>
-          {editMode ? 'Update' : 'Submit '}
+          {edit ? 'Update' : 'Submit '}
         </Button>
 
         <Button
           style={styles.cancelBtn}
           type="reset"
-          onClick={hideForm}
+          onClick={closeForm}
           >Cancel
         </Button>
       </form>

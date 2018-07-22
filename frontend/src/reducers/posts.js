@@ -7,7 +7,7 @@ import {
   VOTE_POST,
 } from '../actions/types'
 
-function posts (state = {}, action) {
+function posts (state = [], action) {
   const { posts, post } = action
   switch (action.type) {
     case GET_POSTS :
@@ -15,14 +15,9 @@ function posts (state = {}, action) {
     case ADD_POST :
       return post
     case DELETE_POST :
-      return [
-        ...state.filter(post => post.id !== action.id)
-      ]
-    case EDIT_POST:
-       return {
-           ...state,
-           posts: state.posts.filter(post => post.id !== action.post.id).concat(action.post)
-       }
+      return state.filter(post => post.id !== action.id)
+    case EDIT_POST :
+      return state.filter(post => post.id !== action.id).concat(post)
    case VOTE_POST:
      return state.map(post => {
        if (post.id === action.id) {

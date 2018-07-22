@@ -9,7 +9,8 @@ class EditPostButton extends Component {
       return(
         <Link
           to={{ pathname: '/edit', state: { post } }}
-          style={{color: "#050505", fontSize: 12 }}>
+          style={{color: "#050505", fontSize: 12 }}
+          >
           <Button
             bsSize="small"
             style={styles.editBtn }>

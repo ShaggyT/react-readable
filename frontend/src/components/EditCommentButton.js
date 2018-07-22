@@ -5,53 +5,54 @@ import { Button } from 'react-bootstrap'
 
 class EditCommentButton extends Component {
   constructor (props) {
-    super(props);
+    super(props)
     this.state = {
-      editMode: false,
-      displayForm: false,
-      commentToEdit: {},
+      edit: false,
+      showForm: false,
+      comment: {},
     }
-    this.showCommentForm = this.showCommentForm.bind(this);
-    this.hideCommentForm = this.hideCommentForm.bind(this);
-  }
-  showCommentForm(comment) {
-    this.setState({
-      displayForm: true,
-      commentToEdit: comment,
-      editMode: true
-    });
+    this.openCommentForm = this.openCommentForm.bind(this)
+    this.closeCommentForm = this.closeCommentForm.bind(this)
   }
 
-  hideCommentForm() {
-    this.setState({ displayForm: false, commentToEdit: {} });
+
+  openCommentForm(comment) {
+    this.setState({
+      edit: true,
+      showForm: true,
+      comment: comment,
+    })
+  }
+
+  closeCommentForm() {
+    this.setState({
+      edit: false,
+      showForm: false,
+      comment: {},
+    })
   }
 
   render() {
     const { comment, id, category } = this.props
-    const { displayForm } = this.state;
+    const { showForm, edit } = this.state;
     return(
       <span>
-        <Link
-          style={{color: "#050505", fontSize: 10, }}
-          to="#"
+        <Button
           onClick={(event) => {
-          event.preventDefault();
-          this.showCommentForm();
-          }}>
-          <Button
-            bsSize="small"
-            style={styles.editBtn}>
-          Edit
-          </Button>
-        </Link>
-
-        {displayForm &&
+          event.preventDefault()
+          this.openCommentForm()
+          }}
+          bsSize="small"
+          style={styles.editBtn}>
+        Edit
+        </Button>
+        {showForm &&
           <CommentForm
             postId={id}
             category={category}
-            editMode={this.state.editMode}
+            edit={edit}
             comment={comment}
-            hideForm={this.hideCommentForm}
+            closeForm={this.closeCommentForm}
           />
         }
       </span>

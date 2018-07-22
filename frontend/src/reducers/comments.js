@@ -16,10 +16,7 @@ function comments (state = [], action) {
     case ADD_COMMENT :
       return comment
     case EDIT_COMMENT:
-     return {
-         ...state,
-         comments: state.comments.filter(comment => comment.id !== action.comment.id).concat(action.comment)
-       }
+      return state.filter(comment => comment.id !== action.comment.id).concat(action.comment)
      case VOTE_COMMENT:
        return state.map(comment => {
          if (comment.id === action.id) {

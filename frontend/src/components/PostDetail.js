@@ -8,13 +8,15 @@ import DeletePostButton from './DeletePostButton'
 import EditPostButton from './EditPostButton'
 import CommentIndexPage from './CommentIndexPage'
 import { getComments } from '../actions/comments'
-
+import { getPosts } from '../actions/posts'
 
 class PostDetail extends Component {
   componentDidMount() {
     const { id } = this.props.match.params
     this.props.getPost(id)
     this.props.getComments(id)
+    const { category } = this.props.match.params
+    this.props.getPosts(category)
   }
 
   render() {
@@ -94,6 +96,7 @@ function mapDispatchToProps (dispatch) {
   return {
     getPost: id => dispatch(getPost(id)),
     getComments: id => dispatch(getComments(id)),
+    getPosts: (data) => dispatch(getPosts(data)),
   }
 }
 

@@ -1,10 +1,18 @@
 import React ,  { Component } from 'react'
-import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
+import {
+  FormGroup,
+  FormControl,
+  ControlLabel,
+  Button
+} from 'react-bootstrap'
 import { getCategories } from '../actions/categories'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { capitalize } from '../utils/helpers'
-import { addPost, editPost } from '../actions/posts'
+import {
+  addPost,
+  editPost
+ } from '../actions/posts'
 import { v4 } from 'uuid'
 import { Link } from 'react-router-dom'
 
@@ -16,12 +24,12 @@ class PostForm extends Component {
 
     this.state = {
       id: post ? post.id : v4(),
+      timestamp: Date.now(),
       title: post ? post.title : '',
+      body: post ? post.body : '',
       author: post ? post.author : '',
       category: post ? post.category : 'react',
-      body: post ? post.body : '',
-      timestamp: Date.now(),
-      showEditForm: location.pathname === '/edit',
+      edit: location.pathname === '/edit',
     }
   }
 
@@ -36,29 +44,32 @@ class PostForm extends Component {
   }
 
   createPost = () => {
-    const  { id, title, author, category, body  }  = this.state
+    const { id, title, author, category, body, edit }  = this.state
+    const { editPost, addPost } = this.props
 
     const post = {
       id: id,
+      timestamp: Date.now(),
       title: title,
+      body: body,
       author: author,
       category: category,
-      body: body,
-      timestamp: Date.now(),
     }
     // update redux: saving specific post into redux store
 
-    if (this.state.showEditForm) {
-      return this.props.editPost(post)
+    if (edit) {
+      return editPost(post)
     }
-
-    return this.props.addPost(post)
-
+    return addPost(post)
   }
+
+
+
+
 
   render() {
     const { categories } = this.props
-    const { category, title, author,body, id, showEditForm } = this.state
+    const { category, title, author,body, id, edit } = this.state
 
     return (
       <form style={styles.container}>
@@ -98,10 +109,12 @@ class PostForm extends Component {
             value={category}
             onChange={this.handleChange}
             >
-              { categories.length > 0 && categories.map(category => (
+              { categories.length > 0 && categories.map((category,index) => (
                 <option
-                  key={category.name}
-                  value={category.name}>{capitalize(category.name)}</option>
+                  key={index}
+                  value={category.name}>
+                  {capitalize(category.name)}
+                </option>
                 ))
               }
           </FormControl>
@@ -117,7 +130,7 @@ class PostForm extends Component {
           />
           <FormControl.Feedback />
         </FormGroup>
-        {showEditForm ?
+        {edit ?
           <Link to={`/posts/${category}/${id}`}>
             <Button
               onClick={this.createPost}

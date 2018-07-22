@@ -1,7 +1,6 @@
 import React ,  { Component } from 'react'
-import { ListGroup, ListGroupItem } from 'react-bootstrap'
+import { ListGroup } from 'react-bootstrap'
 import {
-  capitalize,
   sortByDateAscending,
   sortByDateDescending,
   sortByVotesAscending,
@@ -34,13 +33,12 @@ class CommentList extends Component {
               <h4>No Comment</h4>
             </div>
             :
-            this.sortComments(comments, sortBy).map((comment, index) => (
-               <ListGroupItem
-                 key={index}
-                 style={styles.commentItem}
-                 header={capitalize(comment.title)}>
-                   <Comment comment={comment} />
-               </ListGroupItem>
+            this.sortComments(comments, sortBy).map((comment) => (
+               <Comment
+                key={comment.id}
+                comment={comment}
+                {...comment}
+              />
             ))
         }
       </ListGroup>
@@ -53,15 +51,12 @@ const styles = {
     marginRight: 10,
     marginLeft: 10,
   },
-  commentItem: {
-    marginBottom: 10,
-    borderRadius: 5,
-  },
   noComment: {
     textAlign: 'center',
     padding: 20,
 
   }
 }
+
 
 export default CommentList
