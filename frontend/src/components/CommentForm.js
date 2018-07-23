@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter }from 'react-router-dom'
 import { addComment, editComment } from '../actions/comments'
 import { v4 } from 'uuid'
+import { Link } from 'react-router-dom'
 
 class CommentForm extends Component {
   constructor(props) {
@@ -49,7 +50,7 @@ class CommentForm extends Component {
   render() {
     const { author,body } = this.state
     const { closeForm, edit } = this.props
-    // const { postId, category } = this.props
+    const { postId, category } = this.props
 
     return (
       <form style={styles.container}>
@@ -75,14 +76,13 @@ class CommentForm extends Component {
             onChange={this.handleChange}
           />
         </FormGroup>
-
         <Button
           onClick={this.createComment}
           type="submit"
           style={{ width: 70 , marginBottom: 20 }}>
           {edit ? 'Update' : 'Submit '}
         </Button>
-
+      
         <Button
           style={styles.cancelBtn}
           type="reset"

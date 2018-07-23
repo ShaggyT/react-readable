@@ -11,7 +11,6 @@ import { getComments } from '../actions/comments'
 import { getPosts } from '../actions/posts'
 import Vote from './Vote'
 import { votePost } from '../actions/posts'
-import { Grid, Row, Col } from 'react-bootstrap'
 
 class PostDetail extends Component {
   componentDidMount() {
@@ -88,7 +87,6 @@ const styles = {
     marginRight: 10,
     marginLeft: 10,
     borderRadius: 2,
-    height: 280,
   },
   innerContainer: {
     marginRight: 10,

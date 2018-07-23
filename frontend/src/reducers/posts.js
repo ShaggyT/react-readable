@@ -13,7 +13,7 @@ function posts (state = [], action) {
     case GET_POSTS :
       return posts
     case ADD_POST :
-      return post
+      return state.concat([post])
     case DELETE_POST :
       return state.filter(post => post.id !== action.id)
     case EDIT_POST :
