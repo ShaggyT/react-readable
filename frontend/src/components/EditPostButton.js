@@ -29,10 +29,6 @@ const styles = {
     height: 30,
     borderRadius: 3,
     marginBottom: 1,
-    backgroundColor: "#BC8F8F",
-    borderColor: "#BC8F8F",
-    color: "#fff",
-
   }
 }
 

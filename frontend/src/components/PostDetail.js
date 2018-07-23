@@ -40,7 +40,7 @@ class PostDetail extends Component {
             <p style={{fontSize: 15}}>
               Category: <Link
                 to={`/${post.category}`}
-                style={{color: "#BC8F8F"}}
+                style={{color: "blue"}}
                 >
                {capitalize(post.category)}
             </Link> | Posted At: {formattedDate(post.timestamp)}

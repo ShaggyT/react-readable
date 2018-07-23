@@ -33,10 +33,6 @@ const styles = {
     width: 58,
     height: 30,
     borderRadius: 3,
-    backgroundColor: "#BC8F8F",
-    borderColor: "#BC8F8F",
-    color: "#fff",
-
   }
 }
 

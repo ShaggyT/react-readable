@@ -28,7 +28,7 @@ class Post extends Component {
           header={this.renderTitle(post,title)}>
           <span style={{marginBottom: 10, marginTop: 10, display: 'block' }}>
             Category: <Link to={`/${category}`}
-            style={{color: "#BC8F8F",}}
+            style={{color: "blue",}}
             >{capitalize(category)}</Link> | Posted At: {formattedDate(timestamp)}
           </span>
           <span style={{display : 'block'}}> By: <b>{capitalize(author)}</b> | {commentsCount(commentCount)} | &nbsp;
@@ -61,7 +61,7 @@ const styles = {
   },
   title: {
     textDecoration: 'none',
-    color:"#BC8F8F",
+    color:"blue",
     fontSize: 18,
     marginBottom: 10,
   }
