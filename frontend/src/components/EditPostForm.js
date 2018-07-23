@@ -9,21 +9,22 @@ import { getCategories } from '../actions/categories'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { capitalize } from '../utils/helpers'
-import { addPost } from '../actions/posts'
-import { v4 } from 'uuid'
+import { editPost } from '../actions/posts'
 import { Link } from 'react-router-dom'
 
-class PostForm extends Component {
+class EditPostForm extends Component {
   constructor(props) {
     super(props)
+    const { location } = props
+    const post = location.state.post
 
     this.state = {
-      id:  v4(),
+      id: post.id,
       timestamp: Date.now(),
-      title: '',
-      body: '',
-      author: '',
-      category:  'react',
+      title: post.title,
+      body: post.body,
+      author: post.author,
+      category: post.category,
     }
   }
 
@@ -39,7 +40,7 @@ class PostForm extends Component {
 
   createPost = () => {
     const { id, title, author, category, body }  = this.state
-    const { addPost } = this.props
+    const { editPost } = this.props
 
     const post = {
       id: id,
@@ -50,8 +51,7 @@ class PostForm extends Component {
       category: category,
     }
     // update redux: saving specific post into redux store
-
-    return addPost(post)
+    return editPost(post)
 
   }
 
@@ -118,12 +118,13 @@ class PostForm extends Component {
           />
           <FormControl.Feedback />
         </FormGroup>
+
         <Link to={`/posts/${category}/${id}`}>
           <Button
             onClick={this.createPost}
             style={{ width: 70 }}
             type="submit">
-            Submit
+            Update
           </Button>
         </Link>
         <Link to="/">
@@ -153,9 +154,9 @@ function mapStateToProps ( categories ) {
 function mapDispatchToProps (dispatch) {
   return {
     getCategories: () => dispatch(getCategories()),
-    addPost: (post) => dispatch(addPost(post)),
+    editPost: (post) => dispatch(editPost(post)),
   }
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(PostForm))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(EditPostForm))

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 
 class EditPostButton extends Component {
   render() {
-
     const { post } = this.props
       return(
         <Link
@@ -29,7 +28,11 @@ const styles = {
     width: 58,
     height: 30,
     borderRadius: 3,
-    marginBottom: 1
+    marginBottom: 1,
+    backgroundColor: "#BC8F8F",
+    borderColor: "#BC8F8F",
+    color: "#fff",
+
   }
 }
 

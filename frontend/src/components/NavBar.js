@@ -25,7 +25,7 @@ class NavBar extends Component {
             <NavDropdown
                eventKey={1}
                title="Categories"
-               style={{fontWeight: 'bold'}}
+               style={{fontSize: 18}}
                id="basic-nav-dropdown"
                >
               <MenuItem eventKey={1.1} href="/"> All </MenuItem>

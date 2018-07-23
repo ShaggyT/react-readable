@@ -16,12 +16,27 @@ class DeletePostButton extends Component {
         onClick={() => this.handleDelete(post.id)}
       >
         <Button
-          bsSize="small"
-          style={{marginTop: 10 }}>
+          style={styles.deleteBtn}
+          bsSize="small">
           Delete
         </Button>
       </Link>
     )
+  }
+}
+
+
+const styles = {
+  deleteBtn: {
+    marginTop: 10,
+    marginLeft: 10,
+    width: 58,
+    height: 30,
+    borderRadius: 3,
+    backgroundColor: "#BC8F8F",
+    borderColor: "#BC8F8F",
+    color: "#fff",
+
   }
 }
 

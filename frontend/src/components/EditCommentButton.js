@@ -1,5 +1,4 @@
 import React , { Component } from 'react'
-import { Link } from 'react-router-dom'
 import CommentForm from './CommentForm'
 import { Button } from 'react-bootstrap'
 
@@ -67,7 +66,7 @@ const styles = {
     width: 58,
     height: 30,
     borderRadius: 3,
-    marginBottom: 1
+    marginBottom: 1,
   }
 }
 

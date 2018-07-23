@@ -9,6 +9,9 @@ import EditPostButton from './EditPostButton'
 import CommentIndexPage from './CommentIndexPage'
 import { getComments } from '../actions/comments'
 import { getPosts } from '../actions/posts'
+import Vote from './Vote'
+import { votePost } from '../actions/posts'
+import { Grid, Row, Col } from 'react-bootstrap'
 
 class PostDetail extends Component {
   componentDidMount() {
@@ -20,7 +23,7 @@ class PostDetail extends Component {
   }
 
   render() {
-    const { post, comments } = this.props
+    const { post, comments, votePost } = this.props
     if (!post.id) {
       return(
         <div> </div>
@@ -28,26 +31,41 @@ class PostDetail extends Component {
     }
 
     return(
-      <div>
+      <div style={styles.container}>
         <Jumbotron style={styles.container}>
           <div style={styles.innerContainer}>
-            <h3>{post.title}</h3>
+            <h3>{capitalize(post.title)}</h3>
             <h4 >
               {post.body}
             </h4>
             <p style={{fontSize: 15}}>
               Category: <Link
                 to={`/${post.category}`}
-                style={{color: 'blue',}}
+                style={{color: "#BC8F8F"}}
                 >
                {capitalize(post.category)}
             </Link> | Posted At: {formattedDate(post.timestamp)}
             </p>
             <p style={{fontSize: 15}}>
-              By: <b>{post.author}</b> | {commentsCount(post.commentCount)}
+              By: <b>{capitalize(post.author)}</b> | {commentsCount(post.commentCount)} | &nbsp;
+              <Vote
+                onVoteUp={() => {
+                  votePost(post.id, "upVote").then(() => {
+                    setTimeout(function(){window.location.reload();},0.0000001)
+                    })
+                  }
+                }
+                onVoteDown={() => {
+                  votePost(post.id, "downVote").then(() => {
+                    setTimeout(function(){window.location.reload();},0.0000001)
+                    })
+                  }
+                }
+                voteResult={post.voteScore}
+              />
             </p>
             <p>
-              <DeletePostButton post={post}/>
+              <DeletePostButton  style={styles.deleteBtn} post={post}/>
               <EditPostButton post={post} />
             </p>
           </div>
@@ -69,11 +87,12 @@ const styles = {
   container: {
     marginRight: 10,
     marginLeft: 10,
-    borderRadius: 2
+    borderRadius: 2,
+    height: 280,
   },
   innerContainer: {
     marginRight: 10,
-    marginLeft: 10,
+    marginLeft: 30,
   },
   header: {
     marginLeft: 10,
@@ -82,21 +101,24 @@ const styles = {
   button: {
     backgroundColor: "#BC8F8F",
     borderColor: "#BC8F8F",
-    color: "#fff"
-  }
+    color: "#fff",
+  },
+  vote: {
+    marginTop: 60,
+  },
 }
 
 const mapStateToProps = ({ post, comments }) => ({
   post: post,
   comments: comments,
-
 })
 
 function mapDispatchToProps (dispatch) {
   return {
     getPost: id => dispatch(getPost(id)),
     getComments: id => dispatch(getComments(id)),
-    getPosts: (data) => dispatch(getPosts(data)),
+    getPosts: (category) => dispatch(getPosts(category)),
+    votePost: (id,option) => dispatch(votePost(id,option)),
   }
 }
 

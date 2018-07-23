@@ -3,3 +3,8 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+#basic-nav-dropdown {
+  color: white ;
+  background-color: #BC8F8F;
+}

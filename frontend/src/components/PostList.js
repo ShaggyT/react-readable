@@ -32,7 +32,6 @@ class PostList extends Component {
 
     return (
       <ListGroup style={styles.container}>
-
         {posts && this.sortPosts(posts, sortBy).map((post,index) => (
           <span key={index}>
             <Post

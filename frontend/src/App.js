@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom'
 import PostDetail from './components/PostDetail'
 import PostIndexPage from './components/PostIndexPage'
 import PostForm from './components/PostForm'
+import EditPostForm from './components/EditPostForm'
 
 class App extends Component {
 
@@ -20,7 +21,7 @@ class App extends Component {
         <NavBar />
         <Switch>
           <Route exact path='/posts/new' component={PostForm} />
-          <Route exact path='/edit' component={PostForm} />
+          <Route exact path='/edit' component={EditPostForm} />
           <Route exact path="/" component={PostIndexPage} />
           <Route exact path="/:category" component={PostIndexPage} />
           <Route exact path='/posts/:category/:id' component={PostDetail} />

@@ -28,10 +28,10 @@ class Post extends Component {
           header={this.renderTitle(post,title)}>
           <span style={{marginBottom: 10, marginTop: 10, display: 'block' }}>
             Category: <Link to={`/${category}`}
-            style={{color: 'blue',}}
+            style={{color: "#BC8F8F",}}
             >{capitalize(category)}</Link> | Posted At: {formattedDate(timestamp)}
           </span>
-          <span style={{display : 'block'}}> By: <b>{author}</b> | {commentsCount(commentCount)} | &nbsp;
+          <span style={{display : 'block'}}> By: <b>{capitalize(author)}</b> | {commentsCount(commentCount)} | &nbsp;
             <Vote
               onVoteUp={() => votePost(id, "upVote")}
               onVoteDown={() => votePost(id, "downVote")}
@@ -39,7 +39,10 @@ class Post extends Component {
             />
           </span>
           <DeletePostButton post={post}/>
-          <EditPostButton post={post} />
+          <EditPostButton
+          category={category}
+          postId={id}
+          post={post} />
         </ListGroupItem>
       </div>
     )
@@ -58,7 +61,7 @@ const styles = {
   },
   title: {
     textDecoration: 'none',
-    color:'blue',
+    color:"#BC8F8F",
     fontSize: 18,
     marginBottom: 10,
   }
