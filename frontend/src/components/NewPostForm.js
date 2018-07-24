@@ -13,7 +13,7 @@ import { addPost } from '../actions/posts'
 import { v4 } from 'uuid'
 import { Link } from 'react-router-dom'
 
-class PostForm extends Component {
+class NewPostForm extends Component {
   constructor(props) {
     super(props)
 
@@ -158,4 +158,4 @@ function mapDispatchToProps (dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(PostForm))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NewPostForm))

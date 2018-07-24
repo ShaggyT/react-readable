@@ -4,16 +4,18 @@ import {
   capitalize,
  } from '../utils/helpers'
 import DeleteCommentButton from './DeleteCommentButton'
-import EditCommentButton from './EditCommentButton'
 import Vote from './Vote'
 import { voteComment } from '../actions/comments'
 import { connect } from 'react-redux'
 import { ListGroupItem } from 'react-bootstrap'
+import EditCommentButton from './EditCommentButton'
 
 class Comment extends Component {
 
   render() {
-    const { parentId, category, showEditCommentForm, comment, body, timestamp, author, id, voteScore, voteComment } = this.props
+    const { parentId, category,
+      comment, body, timestamp, author, id, voteScore, voteComment } = this.props
+
     return (
       <div style={styles.container}>
         <ListGroupItem
@@ -34,10 +36,10 @@ class Comment extends Component {
             />
           </span>
            <DeleteCommentButton id={parentId} comment={comment} />
-           <EditCommentButton showForm={showEditCommentForm}
-           comment={comment}
-           category={category}
-           id={parentId}/>
+           <EditCommentButton
+             comment={comment}
+             category={category}
+             postId={parentId} />
         </ListGroupItem>
       </div>
     )

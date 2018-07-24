@@ -23,7 +23,7 @@ class CommentList extends Component {
   }
 
   render() {
-    const { comments, sortBy } = this.props
+    const { comments, sortBy, category } = this.props
     return (
       <ListGroup style={styles.container}>
         {comments && comments.length === 0 ?
@@ -35,6 +35,7 @@ class CommentList extends Component {
             :
             this.sortComments(comments, sortBy).map((comment) => (
                <Comment
+                category={category}
                 key={comment.id}
                 comment={comment}
                 {...comment}

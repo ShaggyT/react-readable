@@ -1,61 +1,24 @@
-import React , { Component } from 'react'
-import CommentForm from './CommentForm'
+import React ,  { Component } from 'react'
 import { Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 class EditCommentButton extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      edit: false,
-      showForm: false,
-      comment: {},
-    }
-    this.openCommentForm = this.openCommentForm.bind(this)
-    this.closeCommentForm = this.closeCommentForm.bind(this)
-  }
-
-
-  openCommentForm(comment) {
-    this.setState({
-      edit: true,
-      showForm: true,
-      comment: comment,
-    })
-  }
-
-  closeCommentForm() {
-    this.setState({
-      edit: false,
-      showForm: false,
-      comment: {},
-    })
-  }
-
   render() {
-    const { comment, id, category } = this.props
-    const { showForm, edit } = this.state;
-    return(
-      <span>
-        <Button
-          onClick={(event) => {
-          event.preventDefault()
-          this.openCommentForm()
-          }}
-          bsSize="small"
-          style={styles.editBtn}>
-        Edit
-        </Button>
-        {showForm &&
-          <CommentForm
-            postId={id}
-            category={category}
-            edit={edit}
-            comment={comment}
-            closeForm={this.closeCommentForm}
-          />
-        }
-      </span>
-    )
+    const { comment, category, postId} = this.props
+
+      return(
+        <Link
+          to={{ pathname: `/posts/${category}/${postId}/comments/edit`, state: { comment } }}
+          style={{color: "#050505", fontSize: 12 }}
+          >
+          <Button
+            bsSize="small"
+            style={styles.editBtn }>
+            Edit
+          </Button>
+        </Link>
+      )
+
   }
 }
 

@@ -6,16 +6,21 @@ import { addComment, editComment } from '../actions/comments'
 import { v4 } from 'uuid'
 import { Link } from 'react-router-dom'
 
-class CommentForm extends Component {
+class EditCommentForm extends Component {
   constructor(props) {
     super(props)
-    const { comment } = this.props
+    const { location } = props
+    const  comment  = location.state.comment
+
+    const postId = this.props.match.params.id;
+    const { category } = this.props.match.params;
+
 
     this.state = {
-      id: comment ? comment.id : v4(),
+      id: comment.id,
       timestamp: Date.now(),
-      body: comment ? comment.body : '',
-      author: comment ? comment.author : '',
+      body: comment.body,
+      author: comment.author,
     }
   }
 
@@ -27,9 +32,10 @@ class CommentForm extends Component {
 
   createComment = () => {
     const postId = this.props.match.params.id;
-
+    const { category } = this.props.match.params;
+    const { editComment } = this.props
     const { id, author, body } = this.state
-    const { editComment, addComment, edit } = this.props
+
 
     const comment = {
       id: id,
@@ -40,17 +46,15 @@ class CommentForm extends Component {
     }
     // update redux: saving specific post into redux store
 
-    if (edit) {
-       return editComment(comment)
-
-    }
-    return addComment(comment)
+    return editComment(comment)
   }
 
   render() {
     const { author,body } = this.state
-    const { hideForm,closeForm, edit } = this.props
-    const { postId, category } = this.props
+    const { closeForm, edit } = this.props
+    const postId = this.props.match.params.id;
+    const { category } = this.props.match.params;
+
 
     return (
       <form style={styles.container}>
@@ -76,27 +80,19 @@ class CommentForm extends Component {
             onChange={this.handleChange}
           />
         </FormGroup>
-        <Button
-          onClick={this.createComment}
-          type="submit"
-          style={{ width: 70 , marginBottom: 20 }}>
-          {edit ? 'Update' : 'Submit '}
-        </Button>
-        {edit ?
+        <Link to={`/posts/${category}/${postId}`}>
           <Button
-            style={styles.cancelBtn}
-            type="reset"
-            onClick={closeForm}
-            >Cancel
+            onClick={this.createComment}
+            type="submit"
+            style={{ width: 70 , marginBottom: 20 }}>
+            Update
           </Button>
-        :
-          <Button
-            style={styles.cancelBtn}
-            type="reset"
-            onClick={hideForm}
-            >Cancel
-          </Button>
-        }
+        </Link>
+
+        <Link to={`/posts/${category}/${postId}`}>
+          <Button style={styles.cancelBtn} type="reset">Cancel</Button>
+        </Link>
+
       </form>
     );
   }
@@ -117,9 +113,9 @@ const styles = {
 
 function mapDispatchToProps (dispatch) {
   return {
-    addComment: (comment) => dispatch(addComment(comment)),
     editComment: (comment) => dispatch(editComment(comment)),
+    addComment: (comment) => dispatch(addComment(comment)),
   }
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(CommentForm))
+export default connect(null, mapDispatchToProps)(withRouter(EditCommentForm))
