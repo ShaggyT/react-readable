@@ -49,7 +49,7 @@ class CommentForm extends Component {
 
   render() {
     const { author,body } = this.state
-    const { closeForm, edit } = this.props
+    const { hideForm,closeForm, edit } = this.props
     const { postId, category } = this.props
 
     return (
@@ -82,13 +82,21 @@ class CommentForm extends Component {
           style={{ width: 70 , marginBottom: 20 }}>
           {edit ? 'Update' : 'Submit '}
         </Button>
-      
-        <Button
-          style={styles.cancelBtn}
-          type="reset"
-          onClick={closeForm}
-          >Cancel
-        </Button>
+        {edit ?
+          <Button
+            style={styles.cancelBtn}
+            type="reset"
+            onClick={closeForm}
+            >Cancel
+          </Button>
+        :
+          <Button
+            style={styles.cancelBtn}
+            type="reset"
+            onClick={hideForm}
+            >Cancel
+          </Button>
+        }
       </form>
     );
   }
