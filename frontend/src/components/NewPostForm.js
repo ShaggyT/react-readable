@@ -52,7 +52,6 @@ class NewPostForm extends Component {
     // update redux: saving specific post into redux store
 
     return addPost(post)
-
   }
 
   render() {

@@ -88,11 +88,9 @@ class EditCommentForm extends Component {
             Update
           </Button>
         </Link>
-
         <Link to={`/posts/${category}/${postId}`}>
           <Button style={styles.cancelBtn} type="reset">Cancel</Button>
         </Link>
-
       </form>
     );
   }

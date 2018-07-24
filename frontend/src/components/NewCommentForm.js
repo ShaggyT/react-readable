@@ -82,6 +82,9 @@ class NewCommentForm extends Component {
             Submit
           </Button>
         </Link>
+        <Link to={`/posts/${category}/${postId}`}>
+          <Button style={styles.cancelBtn} type="reset">Cancel</Button>
+        </Link>
       </form>
     );
   }
@@ -96,6 +99,11 @@ const styles = {
   inputLabel: {
     fontSize: 15,
     marginBottom: 10,
+  },
+  cancelBtn: {
+    marginLeft: 10,
+    width: 70,
+    marginBottom: 20,
   }
 }
 

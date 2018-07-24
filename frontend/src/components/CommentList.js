@@ -55,7 +55,6 @@ const styles = {
   noComment: {
     textAlign: 'center',
     padding: 20,
-
   }
 }
 
