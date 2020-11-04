@@ -3,7 +3,7 @@
   * This is the final assessment project for Udacity's [ Redux course](https://www.udacity.com/course/react-nanodegree--nd019).
   * This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.
   * The API Server was cloned form:  
-    * `Clone Readable API Server: git clone https://github.com/udacity/reactnd-project-readable-starter.git`
+    * `git clone https://github.com/udacity/reactnd-project-readable-starter.git`
   * This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 
