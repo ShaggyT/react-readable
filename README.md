@@ -20,7 +20,7 @@ Redable is content and comment web app were  sers will be able to post content t
 
   1. Download or clone the repository
   ```
-    - git clone git@github.com:ShaggyT/react-native-udacifitness.git
+    - git clone git@github.com:ShaggyT/react-readable.git
     - cd react-native-udacifitness
   ```
   2. Install and start the API server
