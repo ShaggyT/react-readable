@@ -25,6 +25,7 @@ Redable is content and comment web app were  sers will be able to post content t
   ```
   2. Install and start the API server
    ```
+    - cd api-server
     - npm install
     - node server
   ```
